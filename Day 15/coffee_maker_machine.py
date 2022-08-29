@@ -25,10 +25,11 @@ coin_2 = 0
 coin_5 = 0
 coin_10 = 0
 coin_20 = 0
+money_collected = 0
 
 
 def coffee_option(type):
-    global coin_1, coin_2, coin_5, coin_10, coin_20
+    global coin_1, coin_2, coin_5, coin_10, coin_20, money_collected
 
     if resources['water'] >= menu[type]['ingredients']['water'] and resources['milk'] >= menu[type]['ingredients'][
         'milk'] and resources['coffee'] >= menu[type]['ingredients']['coffee']:
@@ -46,14 +47,17 @@ def coffee_option(type):
                 resources['water'] = resources['water'] - menu[type]['ingredients']['water']
                 resources['milk'] = resources['milk'] - menu[type]['ingredients']['milk']
                 resources['coffee'] = resources['coffee'] - menu[type]['ingredients']['coffee']
+                money_collected = money_collected + menu[type]['cost']
             elif type == 'latte':
                 resources['water'] = resources['water'] - menu[type]['ingredients']['water']
                 resources['milk'] = resources['milk'] - menu[type]['ingredients']['milk']
                 resources['coffee'] = resources['coffee'] - menu[type]['ingredients']['coffee']
+                money_collected = money_collected + menu[type]['cost']
             elif type == 'cappuccino':
                 resources['water'] = resources['water'] - menu[type]['ingredients']['water']
                 resources['milk'] = resources['milk'] - menu[type]['ingredients']['milk']
                 resources['coffee'] = resources['coffee'] - menu[type]['ingredients']['coffee']
+                money_collected = money_collected + menu[type]['cost']
             print(money)
     else:
         current_resource = resources_calculation(type)
@@ -94,6 +98,7 @@ while True:
         print(f"Water : {resources['water']} ml")
         print(f"Milk : {resources['milk']} ml")
         print(f"Coffee : {resources['coffee']} g")
+        print(f"Money : rs {money_collected}")
     elif user_choice == 'latte':
         coffee_option('latte')
     elif user_choice == 'espresso':
